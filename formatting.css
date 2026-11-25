@@ -7,6 +7,9 @@
     --text-common: var(--turquoise-surf);
     --text-error: var(--error-red);
     --border-common: var(--blue-green);
+    --sidebar-bg: var(--blue-green);
+    --sidebar-text: var(--white);
+    --sidebar-icon-text: var(--black);
 
     /* =================== */
 }
@@ -36,13 +39,13 @@ main {
 
 header {
     text-align: center;
-    background-color: var(--footheader);
+    background: var(--footheader);
     color: var(--footheader-text);
 }
 
 footer {
     text-align: center;
-    background-color: var(--footheader);
+    background: var(--footheader);
     color: var(--footheader-text);
 }
 
@@ -66,7 +69,7 @@ footer {
     cursor: pointer;
     border: solid var(--border-common);
     color: var(--text-common);
-    background-color: var(--white);
+    background: var(--white);
 }
 
 .login-box input {
@@ -86,4 +89,177 @@ footer {
     width: 0;
     min-width: 100%;
     overflow-wrap: break-word;
+}
+
+main:has(.columns-list) {
+    align-items: stretch;
+}
+
+.columns-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    align-items: stretch;
+}
+
+/* Individual column styling */
+.columns-list>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+/* Vertical divider lines between columns */
+.columns-list>div:not(:last-child) {
+    border-right: solid var(--border-common);
+}
+
+/* Shared Pill Styling */
+.columns-list h1 {
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border: 2px solid var(--black);
+    border-radius: 12px;
+    padding: 0.55rem 1.4rem;
+    margin-top: 0;
+}
+
+/* Column-Specific Colors */
+#not-started h1 {
+    background: var(--error-red);
+    color: var(--white);
+}
+
+#in-progress h1 {
+    background: var(--warning-amber);
+    color: var(--black);
+}
+
+#completed h1 {
+    background: var(--success-green);
+    color: var(--white);
+}
+
+/* Task Card Layout & Styling */
+.task-card {
+    width: 100%;
+    max-width: 340px;
+    box-sizing: border-box;
+    background: var(--white);
+    border: 2px solid var(--border-common);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 3px 6px rgba(2, 62, 138, 0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Top bar: Status dot + Dates */
+.task-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--frosted-blue);
+    font-size: 0.85rem;
+    color: var(--bright-teal-blue);
+}
+
+/* Task Description */
+.task-details {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-common);
+    line-height: 1.35;
+}
+
+/* =========================================
+   App Pages Sidebar Layout (home, tasks, settings)
+   ========================================= */
+
+body.app-layout {
+    flex-direction: row;
+}
+
+body.app-layout>header.sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.sidebar-top {
+    background: var(--bg-common);
+    padding-left: 1rem;
+}
+
+.wave-divider {
+    display: block;
+    width: 100%;
+    height: 22px;
+    background: linear-gradient(to bottom, var(--bg-common) 50%, var(--sidebar-bg) 50%);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    margin-bottom: auto;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-size: 1.25rem;
+    border: solid var(--bg-common);
+    border-radius: 10px;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: var(--bg-common);
+}
+
+.nav-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--sidebar-text);
+    color: var(--sidebar-icon-text);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.sidebar-bottom {
+    padding: 1.25rem 1.5rem;
+    font-size: 2rem;
+}
+
+body.app-layout .page-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+body.app-layout main {
+    margin: 2vh 3vw;
 }
